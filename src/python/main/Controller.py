@@ -18,8 +18,9 @@ def placeOrder(symbol, side, qty):
 OPEN POSITION FUNCTIONS
 '''
 def getPositionBySymbol(symbol):
-    Positions.getPositionBySymbol(symbol, api)
-getPositionBySymbol("AAPL")
+    openPos = Positions.getPositionBySymbol(symbol, api)
+    print(openPos)
+getPositionBySymbol("TSLA")
 
 def getAllPositions():
     Positions.getAllPositions(api)
