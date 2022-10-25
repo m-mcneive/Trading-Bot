@@ -19,7 +19,7 @@ OPEN POSITION FUNCTIONS
 '''
 def getPositionBySymbol(symbol):
     Positions.getPositionBySymbol(symbol, api)
-#getPositionBySymbol("AAPL")
+getPositionBySymbol("AAPL")
 
 def getAllPositions():
     Positions.getAllPositions(api)
