@@ -1,5 +1,6 @@
-from trading import Account, Orders, Positions
+from trading import Account, Orders, Positions, Market
 from config import GlobalVariables
+from plot import Plot
 from alpaca.trading.enums import OrderSide
 import alpaca_trade_api as tradeapi
 
@@ -20,8 +21,26 @@ OPEN POSITION FUNCTIONS
 def getPositionBySymbol(symbol):
     openPos = Positions.getPositionBySymbol(symbol, api)
     print(openPos)
-getPositionBySymbol("TSLA")
+#getPositionBySymbol("TSLA")
 
 def getAllPositions():
     Positions.getAllPositions(api)
 #getAllPositions()
+
+'''
+MARKET DATA FUNCTIONS
+'''
+
+def getTodayVolume(symbol):
+    return Market.getTodayVolumeLastHour(symbol, api)
+
+
+'''
+PLOTTING FUNCTIONS
+'''
+def plotDf(df, title, fields = None):
+    Plot.plotDf(df, title, fields)
+
+data = getTodayVolume("AAPL")
+print(data)
+plotDf(data, "AAPL", ["volume"])
