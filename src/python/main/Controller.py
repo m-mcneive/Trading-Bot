@@ -1,7 +1,6 @@
 from trading import Account, Orders, Positions, Market
 from config import GlobalVariables
 from plot import Plot
-from alpaca.trading.enums import OrderSide
 import alpaca_trade_api as tradeapi
 
 trading_client = GlobalVariables.getTradingClient()
@@ -41,6 +40,42 @@ PLOTTING FUNCTIONS
 def plotDf(df, title, fields = None):
     Plot.plotDf(df, title, fields)
 
-data = getTodayVolume("AAPL")
-print(data)
-plotDf(data, "AAPL", ["volume"])
+# data = getTodayVolume("AAPL")
+# print(data)
+# plotDf(data, "AAPL", ["volume"])
+
+'''
+HELP FUNCTION
+'''
+
+
+
+'''
+USER INPUT
+'''
+
+def helpRequest():
+    help = """
+order                       Place a buy or sell order
+    Symbol
+    Side (BUY or SELL)
+    Quantity
+
+position                    Get current positions
+    Field
+        ALL                 Get all positions
+        Symbol              Get positions for a symbol
+    """
+
+    print(help)
+
+def takeInput():
+    while(True):
+        cmd = input("Input a command (type \"help\" for help)")
+        cmd = cmd.upper()
+        if cmd == "HELP":
+            helpRequest()
+        elif cmd == "ORDER":
+            Orders.takeOrderInput()
+
+takeInput()
