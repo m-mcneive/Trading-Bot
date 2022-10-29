@@ -48,12 +48,6 @@ def plotDf(df, title, fields = None):
 HELP FUNCTION
 '''
 
-
-
-'''
-USER INPUT
-'''
-
 def helpRequest():
     help = """
 order                       Place a buy or sell order
@@ -69,6 +63,11 @@ position                    Get current positions
 
     print(help)
 
+
+'''
+USER INPUT
+'''
+
 def takeInput():
     while(True):
         cmd = input("Input a command (type \"help\" for help)")
@@ -77,5 +76,7 @@ def takeInput():
             helpRequest()
         elif cmd == "ORDER":
             Orders.takeOrderInput()
+        elif cmd == "POSITION":
+            Positions.takePositionInput(api)
 
 takeInput()

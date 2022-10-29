@@ -14,3 +14,12 @@ def build(position):
         "Trade Type": position.asset_class
     }
     return pd.DataFrame(data = [asset])
+
+def generatePositions(positions):
+    df = pd.DataFrame()
+    for pos in positions:
+        df = pd.concat([df,build(position=pos)], ignore_index = True)
+    return df.sort_values("Symbol")
+
+def generateSinglePosition(position):
+    return build(position)
