@@ -59,6 +59,9 @@ position                    Get current positions
     Field
         ALL                 Get all positions
         Symbol              Get positions for a symbol
+
+daily volume                Get daily volume for an asset
+    Symbol
     """
 
     print(help)
@@ -78,5 +81,7 @@ def takeInput():
             Orders.takeOrderInput()
         elif cmd == "POSITION":
             Positions.takePositionInput(api)
+        elif cmd == "DAILY VOLUME":
+            Market.takeVolumeInput(api)
 
 takeInput()
