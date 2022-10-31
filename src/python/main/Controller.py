@@ -64,7 +64,7 @@ daily volume                Get daily volume for an asset
     Symbol
     """
 
-    print(help)
+    return help
 
 
 '''
@@ -76,12 +76,16 @@ def takeInput():
         cmd = input("Input a command (type \"help\" for help)")
         cmd = cmd.upper()
         if cmd == "HELP":
-            helpRequest()
+            help = helpRequest()
+            print(help)
         elif cmd == "ORDER":
-            Orders.takeOrderInput()
+            order = Orders.takeOrderInput()
+            print(order)
         elif cmd == "POSITION":
-            Positions.takePositionInput(api)
+            pos = Positions.takePositionInput(api)
+            print(pos)
         elif cmd == "DAILY VOLUME":
-            Market.takeVolumeInput(api)
+             market = Market.takeVolumeInput(api)
+             print(market)
 
 takeInput()

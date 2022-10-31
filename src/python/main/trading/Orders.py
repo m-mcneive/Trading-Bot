@@ -12,11 +12,11 @@ def placeOrder(symbol, side, qty, account):
                 time_in_force=TimeInForce.GTC
             )
         )
-        return market_order
+        return "Your {side} order for {qty} {symbol} has been placed".format(side=side, qty=qty, symbol=symbol)
     except APIError:
-        print("ERROR: Could not place {side} order for {qty} {symbol}".format(side=side, qty=qty, symbol=symbol))
+        return "ERROR: Could not place {side} order for {qty} {symbol}".format(side=side, qty=qty, symbol=symbol)
         #Extend error notifs
-        
+
 
 def takeOrderInput():
     #Symbol
@@ -25,8 +25,8 @@ def takeOrderInput():
     #Side
     side = input("Side: ")
     if side.upper() != "BUY" and side.upper() != "SELL":
-        print("ERROR: invalid side")
-        return
+        return "ERROR: invalid side"
+        
     side = side.lower()
 
 
@@ -35,10 +35,8 @@ def takeOrderInput():
     try:
         qty = int(qty)
         if qty <= 0:
-            print("ERROR: Quantity can't be negative")
-            return
+            return "ERROR: Quantity can't be negative"
     except ValueError:
-        print("ERROR: Quantity must be a number")
-        return
+        return "ERROR: Quantity must be a number"
 
-    placeOrder(symbol = symbol, side = side, qty = qty)
+    return placeOrder(symbol = symbol, side = side, qty = qty)

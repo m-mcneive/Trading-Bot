@@ -21,9 +21,9 @@ def takePositionInput(api):
     symbol = symbol.upper()
 
     if symbol == "ALL":
-        print(getAllPositions(api))
+        return getAllPositions(api)
     else:
-        print(getPositionBySymbol(symbol=symbol, api=api))
+        return getPositionBySymbol(symbol=symbol, api=api)
        
     
 

@@ -25,7 +25,6 @@ def getTodayVolumeLastHour(symbol, api):
 
 def takeVolumeInput(api):
     if weekday >= 5:
-        print("Cannot get volume \nMarket is not open on weekends")
-        return
+        return "ERROR: Cannot get volume \nMarket is not open on weekends"
     symbol = input("Symbol: ")
-    print(getTodayVolumeLastHour(symbol=symbol, api=api))
+    return getTodayVolumeLastHour(symbol=symbol, api=api)
