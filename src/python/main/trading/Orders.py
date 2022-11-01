@@ -4,7 +4,7 @@ from alpaca.common.exceptions import APIError
 
 def placeOrder(symbol, side, qty, account):
     try:
-        market_order = account.submit_order(
+        account.submit_order(
             MarketOrderRequest(
                 symbol=symbol,
                 qty=qty,

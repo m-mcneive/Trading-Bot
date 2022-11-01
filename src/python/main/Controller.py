@@ -57,5 +57,7 @@ def takeInput():
         elif cmd == "DAILY VOLUME":
              market = Market.takeVolumeInput(api)
              print(market)
+        elif cmd == "MOVING AVERAGE":
+            mov = Market.takeMovingAverageInput(api)
 
 takeInput()
