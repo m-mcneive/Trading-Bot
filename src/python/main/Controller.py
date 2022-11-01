@@ -8,41 +8,11 @@ api = GlobalVariables.getTradeApi()
 
 
 '''
-ORDER FUNCTIONS
-'''
-def placeOrder(symbol, side, qty):
-    Orders.placeOrder(symbol, side, qty, trading_client)
-#placeOrder("BTC/USD", OrderSide.SELL, 5)
-
-'''
-OPEN POSITION FUNCTIONS
-'''
-def getPositionBySymbol(symbol):
-    openPos = Positions.getPositionBySymbol(symbol, api)
-    print(openPos)
-#getPositionBySymbol("TSLA")
-
-def getAllPositions():
-    Positions.getAllPositions(api)
-#getAllPositions()
-
-'''
-MARKET DATA FUNCTIONS
-'''
-
-def getTodayVolume(symbol):
-    return Market.getTodayVolumeLastHour(symbol, api)
-
-
-'''
 PLOTTING FUNCTIONS
 '''
 def plotDf(df, title, fields = None):
     Plot.plotDf(df, title, fields)
 
-# data = getTodayVolume("AAPL")
-# print(data)
-# plotDf(data, "AAPL", ["volume"])
 
 '''
 HELP FUNCTION
@@ -79,7 +49,7 @@ def takeInput():
             help = helpRequest()
             print(help)
         elif cmd == "ORDER":
-            order = Orders.takeOrderInput()
+            order = Orders.takeOrderInput(trading_client)
             print(order)
         elif cmd == "POSITION":
             pos = Positions.takePositionInput(api)

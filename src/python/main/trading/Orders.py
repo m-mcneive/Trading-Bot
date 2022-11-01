@@ -13,21 +13,23 @@ def placeOrder(symbol, side, qty, account):
             )
         )
         return "Your {side} order for {qty} {symbol} has been placed".format(side=side, qty=qty, symbol=symbol)
-    except APIError:
+    except APIError as e:
+        print(e)
         return "ERROR: Could not place {side} order for {qty} {symbol}".format(side=side, qty=qty, symbol=symbol)
         #Extend error notifs
 
 
-def takeOrderInput():
+def takeOrderInput(trading_client):
     #Symbol
     symbol = input("Symbol: ")
+    symbol = symbol.upper()
 
     #Side
     side = input("Side: ")
-    if side.upper() != "BUY" and side.upper() != "SELL":
+    side = side.lower()
+    if side != "buy" and side != "sell":
         return "ERROR: invalid side"
         
-    side = side.lower()
 
 
     #Quantity
@@ -39,4 +41,4 @@ def takeOrderInput():
     except ValueError:
         return "ERROR: Quantity must be a number"
 
-    return placeOrder(symbol = symbol, side = side, qty = qty)
+    return placeOrder(symbol = symbol, side = side, qty = qty, account=trading_client)
