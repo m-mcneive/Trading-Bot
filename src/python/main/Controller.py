@@ -57,7 +57,8 @@ def takeInput():
         elif cmd == "DAILY VOLUME":
              market = Market.takeVolumeInput(api)
              print(market)
-        elif cmd == "MOVING AVERAGE":
+        elif cmd == "MOV":
             mov = Market.takeMovingAverageInput(api)
+            plotDf(mov, "title", ['30_SMA', '120_SMA', 'close'])
 
 takeInput()
