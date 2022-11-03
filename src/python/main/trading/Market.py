@@ -45,12 +45,13 @@ def getMovingAverage(symbol, days, api):
             end=time_15_min_ago.isoformat(), 
             adjustment='raw'
             ).df
-    return data.sort_values(by = "timestamp", ascending = True)
+    data = data.sort_values(by = "timestamp", ascending = True)
+    data['30_SMA'] = data['close'].rolling(window=10, min_periods=1).mean()
+    data['120_SMA'] = data['close'].rolling(window=20, min_periods=1).mean()
+    return data
 
 def takeMovingAverageInput(api):
     symbol = input("Symbol: ")
     data = getMovingAverage(symbol, 201, api)
-    data['30_SMA'] = data['close'].rolling(window=10, min_periods=1).mean()
-    data['120_SMA'] = data['close'].rolling(window=20, min_periods=1).mean()
     print(data)
     return data

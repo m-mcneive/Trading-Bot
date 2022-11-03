@@ -2,6 +2,7 @@ from trading import Account, Orders, Positions, Market
 from config import GlobalVariables
 from plot import Plot
 import alpaca_trade_api as tradeapi
+from algorithms import Momentum
 
 trading_client = GlobalVariables.getTradingClient()
 api = GlobalVariables.getTradeApi()
@@ -61,4 +62,5 @@ def takeInput():
             mov = Market.takeMovingAverageInput(api)
             plotDf(mov, "title", ['30_SMA', '120_SMA', 'close'])
 
-takeInput()
+#takeInput()
+Momentum.updateCurrentPositions()
