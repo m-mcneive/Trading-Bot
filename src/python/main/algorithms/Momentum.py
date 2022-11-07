@@ -5,6 +5,8 @@ from plot import Plot
 
 api = GlobalVariables.getTradeApi()
 
+globalSymbols = ["AAPL", "TSLA", "GOOGL", "AMZN"]
+
 '''
 1. Get all symbols
 2. Check averages
@@ -13,7 +15,7 @@ api = GlobalVariables.getTradeApi()
         If 10 day yesterday < 20 day yesterday -> BUY
     If 10 day < 20 day
         If 10 day yesterday < 20 day yesterday -> Do nothing
-        If 10 day yesterday > 20 day yesterday -> SELL
+        If 10 day yesterday > 20 day yesterday -> SELL (DONE) 
     
 3. Buy / sell
 '''
@@ -21,12 +23,21 @@ api = GlobalVariables.getTradeApi()
 def plotDf(df, title, fields = None):
     Plot.plotDf(df, title, fields)
 
+
+def checkToBuy():
+    for symbol in globalSymbols:
+        avg = Market.getMovingAverage(symbol=symbol, days=200, api=api)
+        today = avg.iloc[-1]
+        yesterday = avg.iloc[-2]
+        if (today['30_SMA'] > today['120_SMA']) and (yesterday['30_SMA'] < yesterday['120_SMA']):
+            print('BUY: ' + symbol)
+
 def checkToSell(symbol):
     avg = Market.getMovingAverage(symbol=symbol, days=200, api=api)
     today = avg.iloc[-1]
     yesterday = avg.iloc[-2]
     if (today['30_SMA'] < today['120_SMA']) and (yesterday['30_SMA'] > yesterday['120_SMA']):
-        print('SELL')
+        print('SELL: ' + symbol)
     #plotDf(avg, symbol, ['30_SMA', '120_SMA', 'close'])
 
 def updateCurrentPositions():
@@ -36,5 +47,7 @@ def updateCurrentPositions():
     
     for symbol in symbols:
         checkToSell(symbol)
+    
+    checkToBuy()
 
 
